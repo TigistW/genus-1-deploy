@@ -1,2 +1,2 @@
-# marshal
-A music genre classifying application
+# Genus
+A music genre classifying application with Machine Learning(ML)
