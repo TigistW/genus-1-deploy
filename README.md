@@ -14,7 +14,8 @@ We have used ___ algorithm to train the model in order to classify/cluster music
 * Django as backend
 * Flutter as frontend
 
-# LICENSE
+# License
+[GNU General Public License v3.0](/LICENSE)
 
 
 # Contributors
