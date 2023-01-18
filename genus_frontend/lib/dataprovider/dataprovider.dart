@@ -10,35 +10,67 @@ class MusicDataprovider {
 
   String apiUrl = "";
 
-// setting the mp3 file inot a wav format
-  Future<Response> predict(String file) async {
-    var response = await httpClient.get(
-      Uri.parse('$apiUrl/something'),
-      headers: <String, String>{'Content-Type': 'application/json'},
-    );
-    if (response.statusCode == 200) {
-      return response;
-    } else {
-      throw Exception('Failed to get music');
-    }
+
+// setting the mp3 file to the backend
+Future<Response> uploadMusicForPrediction({
+    required String file
+  }) async {
+    var request = http.MultipartRequest('POST', Uri.parse('$apiUrl/someurl'));
+    request.files.add(await http.MultipartFile.fromPath(
+      'song',
+      file,
+    ));
+
+    var response = await request.send();
+    final responsed = await http.Response.fromStream(response);
+    final responseData = json.decode(responsed.body)['data'];
+    return responseData;
   }
 
 
-//  adding music to history
-  Future<Music> addMusic(String genre, String file) async {
-    var response = await httpClient.get(
-      Uri.parse('$apiUrl/something'),
-      headers: <String, String>{'Content-Type': 'application/json'},
-    );
-    if (response.statusCode == 200) {
-      return Music.fromJson(jsonDecode(response.body)['data']);
-    } else {
-      throw Exception('Failed to get music');
-    }
-  }
+
+// //  receiving the predition we got based on the id of the mp3 format
+// Future<Response> getPrediction() async {
+//     var response = await httpClient.get(
+//       Uri.parse('$apiUrl/user'),
+//       headers: <String, String>{
+//         'Content-Type': 'application/json'
+//       },
+//     );
+
+//     if (response.statusCode == 200) {
+//       return response;
+//     } else {
+//       throw Exception('Failed to get user');
+//     }
+//   }
 
 
-// a method for predicting a multiple file selection
+// a method for predicting a file selection
+  // Future<Response> saveMusic({
+  //   required String name,
+  //   required String genre,
+  //   required String artist,
+  //   required String size,
+  //   required String image,
+  // }) async {
+  //   var request = http.MultipartRequest('POST', Uri.parse('$apiUrl/user'));
 
+  //   request.fields['title'] = name;
+  //   request.fields['genre'] = genre;
+  //   request.fields['length'] = size;
+  //   request.fields['artist'] = artist;
+
+  //   request.files.add(await http.MultipartFile.fromPath(
+  //     'thumbnail',
+  //     image,
+  //   ));
+
+  //   var response = await request.send();
+  //   final responsed = await http.Response.fromStream(response);
+  //   final responseData = json.decode(responsed.body)['data'];
+
+  //   return responseData;
+  // }
 
 }
