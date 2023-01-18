@@ -19,6 +19,6 @@ We have used ___ algorithm to train the model in order to classify/cluster music
 
 
 # Contributors
-1. Tigist Wondimneh - *UGR/2532/12*
+1. Tigist Wondimneh - *UGR/2538/12*
 2. Abdulkarim Getachew - *UGR/7992/12*
 3. Rediet Ferew - *UGR/1415/12*
