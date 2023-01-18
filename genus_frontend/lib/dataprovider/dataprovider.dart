@@ -23,6 +23,7 @@ class MusicDataprovider {
     }
   }
 
+
 //  adding music to history
   Future<Music> addMusic(String genre, String file) async {
     var response = await httpClient.get(
@@ -35,6 +36,7 @@ class MusicDataprovider {
       throw Exception('Failed to get music');
     }
   }
+
 
 // a method for predicting a multiple file selection
 
