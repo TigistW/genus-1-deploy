@@ -26,21 +26,22 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        // home: const MyHomePage(title: 'Flutter Demo Home Page'),
         home: SplashScreen(
             seconds: 10,
             navigateAfterSeconds: MyHomePage(title: 'Flutter Demo Home Page'),
-            image: new Image.asset('assets/trans_logo.png'),
-            title: new Text(
-              'SplashScreen Example',
-              style: new TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0,
-                  color: Color(0xff3BCDBC)),
+            image: new Image.asset(
+              'assets/genus_blue.gif',
             ),
+            // title: new Text(
+            //   'SplashScreen Example',
+            //   style: new TextStyle(
+            //       fontWeight: FontWeight.bold,
+            //       fontSize: 20.0,
+            //       color: Color(0xffD61616)),
+            // ),
             photoSize: 100.0,
-            backgroundColor: Color(0xff020204),
+            backgroundColor: Color(0xff011828),
             styleTextUnderTheLoader: new TextStyle(),
-            loaderColor: Color(0xff3BCDBC)));
+            loaderColor: Color(0xff1DACAE)));
   }
 }
