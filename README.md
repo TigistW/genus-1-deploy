@@ -11,8 +11,8 @@ The model trained will be used as a Single-label classification, meaning it will
 We have used ___ algorithm to train the model in order to classify/cluster music genres.
 
 # Frameworks
-* Django as backend
-* Flutter as frontend
+* Django for backend
+* Flutter for frontend
 
 # License
 [GNU General Public License v3.0](/LICENSE)
