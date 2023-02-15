@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
-// import 'package:open_file_plus/open_file_plus.dart';
+import 'package:open_file_plus/open_file_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
@@ -28,7 +28,7 @@ class _AudioInputPageState extends State<AudioInputPage> {
           _submitMp3(_audioFile);
           // convert(_audioFile.path);
 
-          // OpenFile.open(_audioFile.path);
+          OpenFile.open(_audioFile.path);
         });
       }
     }
