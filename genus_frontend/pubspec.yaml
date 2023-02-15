@@ -37,8 +37,18 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   http: ^0.13.5
-  ffmpeg_kit_flutter:
   flutter_ffmpeg:
+  file_picker: 
+  # tflite_flutter: ^0.9.0
+  # tflite_audio: ^0.3.0
+  path_provider: ^2.0.12
+  open_file_plus: 
+  csv:
+  path:
+  audioplayers: 
+  
+
+
 
 dev_dependencies:
   flutter_test:
