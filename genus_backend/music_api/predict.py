@@ -9,10 +9,7 @@ def predict_gen(meta_d):
         data = pickle.load(pickled)
     print(data)
     meta_d = pd.DataFrame(meta_d)
-    data.predict(meta_d)
-    # svmp = data['svmp']
-    # norma = data['norma']
-    # lgn = data['lgn']
-    # x = norma.transform([meta_d])
-    # pred = svmp.predict(x)
-    # return(lgn[pred[0]])
+    ans = data.predict(meta_d)
+    
+    return ans[0]
+    
