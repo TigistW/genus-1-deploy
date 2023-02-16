@@ -33,48 +33,54 @@ class _AudioInputPageState extends State<AudioInputPage> {
     }
   }
 
-  void predict() async {
+  void trial() async {
     print("---------------------------");
-    String url = "http://192.168.43.250:8000/genus/trial";
+    String url = "http://192.168.43.250:8000/genus/trial/";
     var postUri = Uri.parse(url);
-    Dio dio = new Dio();
-    dio.get(url).then((response) async {
-      var jsonResponse = jsonDecode(response.toString());
-      print(jsonResponse);
-      print("----------------------------------");
-    }).catchError((error) => print(error));
-
-    // var request = http.Request('GET', postUri);
-    // print(request.body);
-    // print(request.toString());
-    // var response = await request.send();
-    // print(";;;;;");
-    // print(response.toString());
+    var request = http.Request('GET', postUri);
+    print(request.body);
+    print(request.toString());
+    var response = await request.send();
+    print(";;;;;");
+    print(response.toString());
+    print(response.statusCode);
+    // print(response['data']);
   }
 
-  // void predict(File? _audioFile) async {
-  //   print("----------------------------------");
-  //   String? fileName = _audioFile?.path.split('/').last;
-  //   String url = "http://192.168.43.250:8000/genus/add";
-  //   var postUri = Uri.parse(url);
-  //   print(postUri);
+  void predict(File? _audioFile) async {
+    print("----------------------------------");
+    String? fileName = _audioFile?.path.split('/').last;
+    String url = "http://192.168.43.250:8000/genus/add/";
+    var postUri = Uri.parse(url);
+    print(postUri);
 
-  //   var request = http.MultipartRequest('POST', postUri);
-  //   request.fields['creation_date'] = "${DateTime.now()}";
-  //   request.files.add(await http.MultipartFile.fromPath(
-  //     'song',
-  //     _audioFile!.path,
-  //   ));
-  //   print(request.toString());
-  //   print("-------------------REQUEST------------------------");
-  //   print(request.toString());
-  //   print("-------------------RESPONSE------------------------");
-  //   var response = await request.send();
-  //   final responsed = await http.Response.fromStream(response);
-  //   print(responsed.toString());
-  //   final responseData = json.decode(responsed.body)['data'];
-  //   print("-------------------RESPONSEDATA------------------------");
-  // }
+    var request = http.MultipartRequest('POST', postUri);
+    request.fields['creation_date'] = "${DateTime.now()}";
+    request.files.add(await http.MultipartFile.fromPath(
+      'song',
+      _audioFile!.path,
+    ));
+    print(request.toString());
+    print("-------------------REQUEST------------------------");
+    print(request.toString());
+    print("-------------------RESPONSE------------------------");
+    var response = await request.send();
+    final responsed = await http.Response.fromStream(response);
+
+    print(responsed.toString());
+    final responseData = json.decode(responsed.body)['data'];
+    print(responseData);
+    print("-------------------RESPONSEDATA------------------------");
+
+    // call the predict functionality hereeea and return a prediction
+
+    String getU = "http://192.168.43.250:8000/genus/predict/";
+    var getUrl = Uri.parse(getU);
+    var req = http.MultipartRequest('GET', getUrl);
+    var res = await req.send();
+    print(res.statusCode);
+    print(res);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,23 +106,21 @@ class _AudioInputPageState extends State<AudioInputPage> {
                             fontSize: 24.0,
                             fontWeight: FontWeight.bold)),
                     Text("$_audioFile",
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 24.0,
                             fontWeight: FontWeight.bold)),
                     Container(),
                     ElevatedButton(
-                      child: Text("Predict",
+                      child: const Text("Predict",
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                           )),
-                      onPressed: predict,
-                      // onPressed: () {
-                      //   setState(() {
-                      //   });
-                      //   predict;
-                      // },
+                      onPressed: () {
+                        setState(() {});
+                        predict(_audioFile);
+                      },
                     ),
                     const SizedBox(height: 20.0),
                   ],
@@ -145,7 +149,7 @@ class _AudioInputPageState extends State<AudioInputPage> {
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                           )),
-                      onPressed: predict,
+                      onPressed: trial,
                     ),
                   ],
                 )),

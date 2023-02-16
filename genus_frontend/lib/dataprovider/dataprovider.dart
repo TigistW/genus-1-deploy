@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter_ffmpeg/flutter_ffmpeg.dart';
 import 'package:genus_frontend/models/music.dart';
 import 'package:http/http.dart' as http;
@@ -10,67 +11,44 @@ class MusicDataprovider {
 
   String apiUrl = "";
 
-
-// setting the mp3 file to the backend
-Future<Response> uploadMusicForPrediction({
-    required String file
-  }) async {
-    var request = http.MultipartRequest('POST', Uri.parse('$apiUrl/someurl'));
-    request.files.add(await http.MultipartFile.fromPath(
-      'song',
-      file,
-    ));
-
+  void trial() async {
+    print("---------------------------");
+    String url = "http://192.168.43.250:8000/genus/trial";
+    var postUri = Uri.parse(url);
+    var request = http.Request('GET', postUri);
+    print(request.body);
+    print(request.toString());
     var response = await request.send();
-    final responsed = await http.Response.fromStream(response);
-    final responseData = json.decode(responsed.body)['data'];
-    return responseData;
+    print(";;;;;");
+    print(response.toString());
   }
 
 
+  void predict(File? _audioFile) async {
+    print("----------------------------------");
+    String? fileName = _audioFile?.path.split('/').last;
+    String url = "http://192.168.43.250:8000/genus/add";
+    var postUri = Uri.parse(url);
+    print(postUri);
 
-// //  receiving the predition we got based on the id of the mp3 format
-// Future<Response> getPrediction() async {
-//     var response = await httpClient.get(
-//       Uri.parse('$apiUrl/user'),
-//       headers: <String, String>{
-//         'Content-Type': 'application/json'
-//       },
-//     );
+    var request = http.MultipartRequest('POST', postUri);
+    request.fields['creation_date'] = "${DateTime.now()}";
+    request.files.add(await http.MultipartFile.fromPath(
+      'song',
+      _audioFile!.path,
+    ));
+    print(request.toString());
+    print("-------------------REQUEST------------------------");
+    print(request.toString());
+    print("-------------------RESPONSE------------------------");
+    var response = await request.send();
+    final responsed = await http.Response.fromStream(response);
+    print(responsed.toString());
+    final responseData = json.decode(responsed.body)['data'];
+    print("-------------------RESPONSEDATA------------------------");
+  }
 
-//     if (response.statusCode == 200) {
-//       return response;
-//     } else {
-//       throw Exception('Failed to get user');
-//     }
-//   }
+  
 
-
-// a method for predicting a file selection
-  // Future<Response> saveMusic({
-  //   required String name,
-  //   required String genre,
-  //   required String artist,
-  //   required String size,
-  //   required String image,
-  // }) async {
-  //   var request = http.MultipartRequest('POST', Uri.parse('$apiUrl/user'));
-
-  //   request.fields['title'] = name;
-  //   request.fields['genre'] = genre;
-  //   request.fields['length'] = size;
-  //   request.fields['artist'] = artist;
-
-  //   request.files.add(await http.MultipartFile.fromPath(
-  //     'thumbnail',
-  //     image,
-  //   ));
-
-  //   var response = await request.send();
-  //   final responsed = await http.Response.fromStream(response);
-  //   final responseData = json.decode(responsed.body)['data'];
-
-  //   return responseData;
-  // }
 
 }

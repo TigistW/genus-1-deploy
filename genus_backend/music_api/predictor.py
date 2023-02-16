@@ -10,16 +10,18 @@ from .metadata_extract import getmetadata
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 class Cnn:
     def __init__(self) -> None:
-        with open("Models/model_pkl.pkl", 'rb') as pickled:
+        with open("Models/model_pkl", 'rb') as pickled:
             self.classifier = pickle.load(pickled)
+            print("_______________________________________________")
+            print(self.classifier.summary())
         # self.classifier = pickle.load("model_training/cnn.joblib",'r')
     
     def make_prediction(self,song):
         music = cv.imread(os.path.join(BASE_DIR,song), 0)
         music_info = getmetadata(music)
         prediction = self.classifier.predict(music_info)
-        
-
+        print(prediction)
+        print("tttttttttttttttttttttttttttttttttttttttt")
         return prediction[0]
     
     # def re_shape(self,image):

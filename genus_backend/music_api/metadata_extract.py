@@ -47,9 +47,8 @@ def getmetadata(filename):
 
     metadata_dict = {'chroma_stft':np.mean(chroma_stft),'rmse':np.mean(rmse),
                      'spectral_centroid':np.mean(spec_centroid),'spectral_bandwidth':np.mean(spec_bw), 
-                     'rolloff':np.mean(spec_rolloff), 'zero_crossing_rates':np.mean(zero_crossing)}
+                     'rolloff':np.mean(spec_rolloff), 'zero_crossing_rate':np.mean(zero_crossing)}
 
-    for i in range(1,21):
+    for i in range(1,14):
         metadata_dict.update({'mfcc'+str(i):np.mean(mfcc[i-1])})
-
     return list(metadata_dict.values())
