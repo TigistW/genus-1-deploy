@@ -2,11 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("", views.getMusics, name = "genus-home"), 
-    path("form/", views.index, name = "upload-sample"),
-    
-    path("login/", views.loginView, name = "login"), 
-    path("register/", views.registerView, name = "register")
-
+    # path("", views.getMusics, name = "genus-home"), 
+    path("predict/", views.predict, name = "predict"),
+    path('add/',views.add_song,name='addsong'),
 
 ]

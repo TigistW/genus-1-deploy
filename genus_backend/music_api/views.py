@@ -1,13 +1,14 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .predictor import Cnn
-from .serializer import MusicSerializer
+from .serializers import MusicSerializer
 from .models import Music
 import os
 
 @api_view(["POST"])
-def creat_numbers(request):
+def add_song(request):
     data = request.data
+    print('-----------------------------------------------------------')
     new_song = Music.objects.create(
         song= data['song'],
         creation_date = data["creation_date"]                   
@@ -22,7 +23,7 @@ def predict(request):
     
     song_path = os.path.join('musics/',str(song_path))
     cnn = Cnn()
-    music = cnn.make_prediction(song)(song_path)
+    music = cnn.make_prediction(songs)(song_path)
     # number = cnn.re_shape(image).reshape(784)
     print("ooooooooooooooooooooo")
     # predicted = cnn.predict_number(music)
