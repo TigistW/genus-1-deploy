@@ -5,8 +5,13 @@ from .serializers import MusicSerializer
 from .models import Music
 import os
 
+@api_view(["GET"])
+def trial(request):
+    return Response("Bitch")
+    
 @api_view(["POST"])
 def add_song(request):
+    print("-----------------ADD SONG-----------------------")
     data = request.data
     print('-----------------------------------------------------------')
     new_song = Music.objects.create(
