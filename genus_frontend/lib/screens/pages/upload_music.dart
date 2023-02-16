@@ -61,3 +61,24 @@
 //     print(e.toString());
 //   }
 // }
+
+
+
+// mainAxisAlignment: MainAxisAlignment.center,
+            // children: [
+            //   const Text("Input Music",
+            //       style: TextStyle(
+            //           color: Colors.white,
+            //           fontSize: 24.0,
+            //           fontWeight: FontWeight.bold)),
+            //   Container(),
+            //   const SizedBox(height: 20.0),
+            //   const ElevatedButton(
+            //     child: Text("Select Audio File",
+            //         style: TextStyle(
+            //           color: Colors.white,
+            //           fontWeight: FontWeight.bold,
+            //         )),
+            //     // onPressed: _pickAudioFile,
+            //   ),
+            // ],

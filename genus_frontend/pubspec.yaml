@@ -46,6 +46,7 @@ dependencies:
   csv:
   path:
   audioplayers: 
+  dio: ^5.0.0
   
 
 
