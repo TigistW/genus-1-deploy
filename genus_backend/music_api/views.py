@@ -7,7 +7,7 @@ import os
 
 @api_view(["GET"])
 def trial(request):
-    return Response("Bitch")
+    return Response("Finally Connected")
     
 @api_view(["POST"])
 def add_song(request):
