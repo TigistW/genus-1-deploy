@@ -1,10 +1,5 @@
 import joblib
-import cv2 as cv
-import os
 from pathlib import Path
-import keras
-import pickle
-import numpy as np
 
 from .metadata_extract import getmetadata
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
