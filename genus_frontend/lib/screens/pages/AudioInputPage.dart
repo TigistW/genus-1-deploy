@@ -79,7 +79,9 @@ class _AudioInputPageState extends State<AudioInputPage> {
     var req = http.MultipartRequest('GET', getUrl);
     var res = await req.send();
     print(res.statusCode);
-    print(res);
+    print(res.toString());
+    // print(res['data']);
+    // print(res.body());
   }
 
   @override

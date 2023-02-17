@@ -10,19 +10,34 @@ from .metadata_extract import getmetadata
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 class Cnn:
     def __init__(self) -> None:
-        with open("Models/model_pkl", 'rb') as pickled:
-            self.classifier = pickle.load(pickled)
-            print("_______________________________________________")
-            print(self.classifier.summary())
+        self.labels = {0:"Ambasel", 1:"Anchihoye", 2:"Bati",3:"Tizita"}
+        self.classify = joblib.load("Models/model.joblib",'r')
+        # with open("Models/model.joblib", 'rb') as pickled:
+        #     self.model = pickle.load(pickled)
+        
+        # self.knn = self.model['svmp']
+        print("_______________________i am here________________________")
+        # print(self.knn.summary())
         # self.classifier = pickle.load("model_training/cnn.joblib",'r')
+        
+    # with open(path, 'rb') as pickled:
+    #     data = pickle.load(pickled)
+    # 
+    # norma = data['norma']
+    # lgn = data['lgn']
+    # x = norma.transform([meta1])
+    # pred = svmp.predict(x)
+    # return(lgn[pred[0]])
     
     def make_prediction(self,song):
-        music = cv.imread(os.path.join(BASE_DIR,song), 0)
-        music_info = getmetadata(music)
-        prediction = self.classifier.predict(music_info)
-        print(prediction)
-        print("tttttttttttttttttttttttttttttttttttttttt")
-        return prediction[0]
+        print("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
+        music_info = getmetadata(song)
+        print(music_info)
+        prediction = self.classify.predict(music_info)
+        print(prediction[0])
+        print("ttttttttttttttttttttttttggggggggtttttttttttttttttttttttttttttttt")
+        print(self.labels[int(prediction[0])])
+        return self.labels[int(prediction[0])]
     
     # def re_shape(self,image):
     #     image = cv.resize(image,(28,28))

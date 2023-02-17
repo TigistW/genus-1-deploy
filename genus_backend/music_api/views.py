@@ -11,7 +11,7 @@ def trial(request):
     
 @api_view(["POST"])
 def add_song(request):
-    print("-----------------ADD SONG-----------------------")
+    print("-----------------ADD SONG---------------------------")
     data = request.data
     print(data)
     print('-----------------------------------------------------------')
@@ -28,13 +28,13 @@ def predict(request):
     print('uuuuuuuuuuuuuuuuuuuuuuuuuuuuuunnnnnnuuuuuuuuuuuuuuuuuuuuuuuu')
     songs = Music.objects.order_by('-creation_date')
     song_path = songs[0].song
-    song_path = os.path.join('media/genus/',str(song_path))
+    song_path = os.path.join('media/',str(song_path))
     print(song_path)
     print("-----------------------------------------------------------")
     cnn = Cnn()
-    music = cnn.make_prediction(songs)(song_path)
+    music = cnn.make_prediction(song_path)
     # number = cnn.re_shape(image).reshape(784)
-    print("ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo")
+    print("ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo")
     # predicted = cnn.predict_number(music)
     return Response(f'{music}')
     # return Response("bitvh")

@@ -2,19 +2,8 @@ import librosa
 import numpy as np
 
 def getmetadata(filename):
-    
-
     y, sr = librosa.load(filename)
     #fetching tempo
-
-    # onset_env = librosa.onset.onset_strength(y, sr)
-    # tempo = librosa.beat.tempo(onset_envelope=onset_env, sr=sr)
-
-    #fetching beats
-
-    # y_harmonic, y_percussive = librosa.effects.hpss(y)
-    # tempo, beat_frames = librosa.beat.beat_track(y=y_percussive,sr=sr)
-
     #chroma_stft
 
     chroma_stft = librosa.feature.chroma_stft(y=y, sr=sr)
@@ -25,7 +14,7 @@ def getmetadata(filename):
 
     #fetching spectral centroid
 
-    spec_centroid = librosa.feature.spectral_centroid(y, sr=sr)[0]
+    spec_centroid = librosa.feature.spectral_centroid(y = y, sr = sr)
 
     #spectral bandwidth
 
@@ -33,7 +22,7 @@ def getmetadata(filename):
 
     #fetching spectral rolloff
 
-    spec_rolloff = librosa.feature.spectral_rolloff(y+0.01, sr=sr)[0]
+    spec_rolloff = librosa.feature.spectral_rolloff(y = y, sr=sr)
 
     #zero crossing rate
 
@@ -45,10 +34,13 @@ def getmetadata(filename):
 
     #metadata dictionary
 
-    metadata_dict = {'chroma_stft':np.mean(chroma_stft),'rmse':np.mean(rmse),
-                     'spectral_centroid':np.mean(spec_centroid),'spectral_bandwidth':np.mean(spec_bw), 
-                     'rolloff':np.mean(spec_rolloff), 'zero_crossing_rate':np.mean(zero_crossing)}
+    metadata_li = [np.mean(chroma_stft), np.mean(rmse), np.mean(spec_centroid), np.mean(spec_bw), np.mean(spec_rolloff), np.mean(zero_crossing)]
 
-    for i in range(1,14):
-        metadata_dict.update({'mfcc'+str(i):np.mean(mfcc[i-1])})
-    return list(metadata_dict.values())
+    for i in range(1,21):
+        metadata_li.append(np.mean(mfcc[i-1]))
+    
+    print(np.array(np.array(metadata_li)))
+    print("oooooooooooooooooooooooo;;;;;;;;;;;;;;;;;oooooooooooooooooo")
+    arr = np.array(metadata_li).reshape(1, -1)
+    print(arr)
+    return arr
