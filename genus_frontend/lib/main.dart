@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => SplashPage(),
         '/home': (context) => AudioInputPage(),
-        '/record':(context)=> AudioRecorder()
+        // '/record':(context)=> AudioRecorder()
       },
     );
   }
