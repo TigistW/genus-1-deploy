@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:genus_frontend/screens/pages/AudioInputPage.dart';
+import 'package:genus_frontend/screens/pages/record_page.dart';
 import 'package:genus_frontend/screens/pages/splash_page.dart';
 import 'package:genus_frontend/screens/pages/upload_music.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => SplashPage(),
         '/home': (context) => AudioInputPage(),
-        // '/predict':(context)=> PredictedPage()
+        '/record':(context)=> AudioRecorder()
       },
     );
   }

@@ -38,9 +38,5 @@ def getmetadata(filename):
 
     for i in range(1,21):
         metadata_li.append(np.mean(mfcc[i-1]))
-    
-    print(np.array(np.array(metadata_li)))
-    print("oooooooooooooooooooooooo;;;;;;;;;;;;;;;;;oooooooooooooooooo")
     arr = np.array(metadata_li).reshape(1, -1)
-    print(arr)
     return arr
